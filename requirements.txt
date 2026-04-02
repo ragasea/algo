@@ -1,0 +1,6 @@
+pandas==2.2.0
+numpy==1.26.0
+yfinance==0.2.36
+pandas-ta==0.3.14b0
+requests==2.31.0
+ccxt==4.2.0
