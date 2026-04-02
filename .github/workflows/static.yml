@@ -1,0 +1,40 @@
+name: Master Quant Trade Bot
+
+on:
+  schedule:
+    - cron: '30 3 * * 1-5' # Runs at 9:00 AM IST (Mon-Fri)
+  workflow_dispatch:      # Allows you to click "Run workflow" manually
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install yfinance pandas
+
+      - name: Run Trading Strategy
+        # This triggers your script to generate the HTML
+        run: python python_scripts/strategy_v1.py
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Uploads the folder containing the NEW index.html
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
