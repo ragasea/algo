@@ -2,26 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Master Quant Hub Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Quant Hub | Live Dashboard</title>
     <style>
-        body { font-family: sans-serif; background: #121212; color: #e0e0e0; padding: 20px; }
-        .card { background: #1e1e1e; padding: 20px; border-radius: 10px; border: 1px solid #333; }
-        h1 { color: #00ff88; }
-        .status { color: #00ff00; font-weight: bold; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 800px; margin: auto; background: #1e293b; padding: 30px; border-radius: 15px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h1 { color: #38bdf8; margin-bottom: 10px; }
+        .status-bar { display: inline-block; padding: 5px 15px; background: #064e3b; color: #4ade80; border-radius: 20px; font-size: 0.9em; margin-bottom: 20px; }
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .data-card { background: #0f172a; padding: 15px; border-radius: 10px; border-left: 4px solid #38bdf8; text-align: left; }
+        .footer { margin-top: 30px; font-size: 0.8em; color: #94a3b8; }
+        a { color: #38bdf8; text-decoration: none; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Welcome, Master Anurag 🔱</h1>
-        <p>System Status: <span class="status">ONLINE</span></p>
-        <p>Last Update: April 2, 2026 - 10:15 AM IST</p>
-        <hr>
-        <h3>Active Monitor:</h3>
-        <ul>
-            <li>Nifty 50: Tracking</li>
-            <li>HDFC Bank: Tracking</li>
-            <li>Crypto/Gold: Active</li>
-        </ul>
+    <div class="container">
+        <h1>Master Quant Hub 🔱</h1>
+        <div class="status-bar">● System Live & Monitoring</div>
+        
+        <p>Welcome, Master Anurag. The algorithms are scanning the markets.</p>
+
+        <div class="data-grid">
+            <div class="data-card">
+                <strong>Current Focus</strong><br>
+                Nifty 50, HDFC Bank, Reliance
+            </div>
+            <div class="data-card">
+                <strong>Daily Goal</strong><br>
+                ₹10,000 Profit Target
+            </div>
+        </div>
+
+        <div class="footer">
+            Last Updated: April 2, 2026 | 12:05 PM IST<br>
+            <a href="https://yogaanurag.blogspot.com">Yoga Anurag Classes</a> | <a href="https://wa.me/916283266268">Contact Manager</a>
+        </div>
     </div>
 </body>
 </html>
