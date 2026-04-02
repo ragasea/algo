@@ -1,0 +1,30 @@
+# Prompt: GitHub Actions Workflow for Master Quant Hub
+# Date: Thursday, April 2, 2026 | Time: 10:15 AM IST
+
+name: Master Quant Trade Bot
+
+on:
+  schedule:
+    - cron: '30 3 * * 1-5' # Runs at 9:00 AM IST (Mon-Fri)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Trading Strategy
+        env:
+          API_KEY: ${{ secrets.TRADING_API_KEY }}
+          API_SECRET: ${{ secrets.TRADING_API_SECRET }}
+        run: python python_scripts/strategy_v1.py
