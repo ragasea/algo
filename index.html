@@ -5,38 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Quant Hub | Live Dashboard</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; text-align: center; }
-        .container { max-width: 800px; margin: auto; background: #1e293b; padding: 30px; border-radius: 15px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        h1 { color: #38bdf8; margin-bottom: 10px; }
-        .status-bar { display: inline-block; padding: 5px 15px; background: #064e3b; color: #4ade80; border-radius: 20px; font-size: 0.9em; margin-bottom: 20px; }
-        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .data-card { background: #0f172a; padding: 15px; border-radius: 10px; border-left: 4px solid #38bdf8; text-align: left; }
-        .footer { margin-top: 30px; font-size: 0.8em; color: #94a3b8; }
-        a { color: #38bdf8; text-decoration: none; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #f8fafc; text-align: center; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: #1e293b; padding: 30px; border-radius: 15px; border: 1px solid #334155; }
+        h1 { color: #38bdf8; }
+        .price-box { background: #0f172a; padding: 15px; margin: 10px 0; border-radius: 10px; border-left: 4px solid #4ade80; text-align: left; display: flex; justify-content: space-between; }
+        .price { color: #4ade80; font-weight: bold; }
+        button { background: #38bdf8; color: #0f172a; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        button:hover { background: #7dd3fc; }
+        #status { font-size: 0.8em; color: #94a3b8; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Master Quant Hub 🔱</h1>
-        <div class="status-bar">● System Live & Monitoring</div>
-        
-        <p>Welcome, Master Anurag. The algorithms are scanning the markets.</p>
+        <p>Real-time Market Monitor</p>
 
-        <div class="data-grid">
-            <div class="data-card">
-                <strong>Current Focus</strong><br>
-                Nifty 50, HDFC Bank, Reliance
-            </div>
-            <div class="data-card">
-                <strong>Daily Goal</strong><br>
-                ₹10,000 Profit Target
-            </div>
-        </div>
+        <div class="price-box"><span>Nifty 50</span> <span id="nifty" class="price">Loading...</span></div>
+        <div class="price-box"><span>Reliance</span> <span id="reliance" class="price">Loading...</span></div>
+        <div class="price-box"><span>HDFC Bank</span> <span id="hdfc" class="price">Loading...</span></div>
 
-        <div class="footer">
-            Last Updated: April 2, 2026 | 12:05 PM IST<br>
-            <a href="https://yogaanurag.blogspot.com">Yoga Anurag Classes</a> | <a href="https://wa.me/916283266268">Contact Manager</a>
-        </div>
+        <button onclick="updatePrices()">🔄 Refresh Live Prices</button>
+        <div id="status">Last updated: Never</div>
     </div>
+
+    <script>
+        async function updatePrices() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerText = "Fetching latest data...";
+            
+            // Note: In a real browser, we use a public API like Yahoo Finance (via a proxy) or Crypto APIs
+            // For this example, we simulate the fetch logic your Python bot uses
+            try {
+                // Simulating price fetch (Replace with your chosen API endpoint)
+                const mockPrices = {
+                    nifty: "₹" + (22450 + Math.random() * 100).toFixed(2),
+                    reliance: "₹" + (2950 + Math.random() * 20).toFixed(2),
+                    hdfc: "₹" + (1450 + Math.random() * 10).toFixed(2)
+                };
+
+                document.getElementById('nifty').innerText = mockPrices.nifty;
+                document.getElementById('reliance').innerText = mockPrices.reliance;
+                document.getElementById('hdfc').innerText = mockPrices.hdfc;
+
+                const now = new Date().toLocaleTimeString();
+                statusDiv.innerText = "Last updated: " + now + " IST";
+            } catch (error) {
+                statusDiv.innerText = "Error fetching data.";
+            }
+        }
+
+        // Initial load
+        updatePrices();
+    </script>
 </body>
 </html>
