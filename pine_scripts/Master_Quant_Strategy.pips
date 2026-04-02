@@ -1,0 +1,37 @@
+// Prompt: Pine Script Strategy for Master Quant Hub
+// Date: Thursday, April 2, 2026 | Time: 10:36 AM IST
+// Description: RSI and EMA-based intraday strategy for Master Anurag
+
+//@version=5
+strategy("Master Quant Strategy v1", overlay=true, initial_capital=100000, default_qty_type=strategy.percent_of_equity, default_qty_value=10)
+
+// --- Inputs ---
+rsiLength = input.int(14, title="RSI Length")
+rsiSource = input.source(close, title="RSI Source")
+rsiEntryLevel = input.int(40, title="RSI Buy Level (Oversold)")
+emaLength = input.int(20, title="EMA Filter Length")
+
+// --- Calculations ---
+rsiValue = ta.rsi(rsiSource, rsiLength)
+emaValue = ta.ema(close, emaLength)
+
+// --- Plotting ---
+plot(emaValue, color=color.blue, title="EMA 20", linewidth=2)
+hline(rsiEntryLevel, "RSI Buy Line", color=color.gray, linestyle=hline.style_dashed)
+
+// --- Strategy Logic ---
+// Logic: Buy if RSI is below 40 and Price is above EMA 20
+longCondition = (rsiValue < rsiEntryLevel) and (close > emaValue)
+
+if (longCondition)
+    strategy.entry("Master Long", strategy.long, comment="BUY 🚀")
+
+// Exit Logic: Close position if RSI crosses back above 70 or Price drops below EMA
+exitCondition = ta.crossunder(close, emaValue) or rsiValue > 70
+
+if (exitCondition)
+    strategy.close("Master Long", comment="EXIT 🏁")
+
+// --- Visual Alerts ---
+plotshape(series=longCondition, title="Buy Signal", location=location.belowbar, color=color.green, style=shape.triangleup, size=size.small, text="QUANT BUY")
+plotshape(series=exitCondition, title="Exit Signal", location=location.abovebar, color=color.red, style=shape.triangledown, size=size.small, text="QUANT EXIT")
